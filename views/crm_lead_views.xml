@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+      <record id="crm_lead_view_form_inherit_boom" model="ir.ui.view">
+        <field name="name">crm.lead.view.form.inherit.boom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+        
+            <xpath expr="//header" position="inside">
+                <field name='x_approved_by' invisible="True" />
+                <button name="action_approve" string="Aprobar"
+                            type="object" class="oe_highlight" data-hotkey="a" title="Marcar como aprobado"
+                            invisible="x_approved_by != False" confirm="¿Está seguro de aprobar el lead?"/>
+            </xpath>
+
+            
+
+
+            <xpath expr="//group[@invisible=&quot;type == 'lead'&quot;]/field[@name='user_id']" position="after">
+                <field name="x_approved_by" readonly="1"/>
+            </xpath>
+            <xpath expr="//group[@invisible=&quot;type == 'opportunity'&quot;]/field[@name='user_id']" position="after">
+                <field name="x_approved_by" readonly="1"/>
+            </xpath>
+
+
+            <xpath expr="//group[@invisible=&quot;type == 'lead'&quot;]" position="inside">
+                <field name="x_lead_category"/>
+                <field name="x_delivery_deadline"/>
+                <field name="x_duration_since_approved"/>
+            </xpath>
+
+            <xpath expr="//group[@name='lead_priority']" position="inside">
+                <field name="x_lead_category"/>
+                <field name="x_delivery_deadline"/>
+                <field name="x_duration_since_approved"/>
+            </xpath>
+
+            <xpath expr="//group[@name='Misc']" position="inside">
+                  <field name="x_installation_required"/>
+                  <field name="x_installation_date"/>
+                  <field name="x_support_required"/>
+                  <field name="x_contract_reference"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="quick_create_opportunity_form_inherit_boom" model="ir.ui.view">
+        <field name="name">quick.create.opportunity.form.inherit.boom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name='x_lead_category' />
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>
